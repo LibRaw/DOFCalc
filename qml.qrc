@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/main.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>qml/AboutDialog.qml</file>
+        <file>qml/SettingsDialog.qml</file>
+        <file>qml/SettingsDialogRowText.qml</file>
+        <file>qml/HeaderTextCell.qml</file>
+        <file>qml/HeaderTextCellBig.qml</file>
+        <file>qml/HeaderItem.qml</file>
+        <file>qml/MainScreenToolBar.qml</file>
+        <file>qml/WheelHeading.qml</file>
+        <file>qml/ListWheel.qml</file>
+        <file>qml/ScrollerCell.qml</file>
+        <file>qml/WhiteText.qml</file>
+    </qresource>
+</RCC>
