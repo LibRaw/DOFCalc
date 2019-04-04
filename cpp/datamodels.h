@@ -50,9 +50,10 @@ protected:
 class distanceModel : public focalModel {
     Q_OBJECT
 public:
-    distanceModel(QObject *parent = nullptr) : focalModel(parent) { formatString = QString(f_distance); }
+    distanceModel(QObject *parent = nullptr) : focalModel(parent) {}
     virtual void populate0(const QHash<QString, int>&);
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
+    static QString prettyPrint(qreal val);
 protected:
-    virtual int digits(qreal val) const { return int(qMax(0.0, std::round(2.0 - std::log10(val)))); }
+    static int _digits(qreal val) { return int(qMax(0.0, std::round(2.0 - std::log10(val)))); }
 };

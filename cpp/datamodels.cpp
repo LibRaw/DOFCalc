@@ -47,7 +47,7 @@ void apertureModel::populate0(const QHash<QString, int>& params) {
         datalist.push_back(floatitem_t(fstoplist[ns][i], !(i % (ns + 1))));
 }
 
-QString cutzeroes(qreal v, int digits) {
+static QString cutzeroes(qreal v, int digits) {
     QString s = QString("%1").arg(v, 0, 'f', digits);
     if (s.contains('.'))
         s.replace(QRegularExpression("\\.0+$"), "");
@@ -56,9 +56,23 @@ QString cutzeroes(qreal v, int digits) {
     return s;
 }
 
+QString distanceModel::prettyPrint(qreal val)
+{
+    if (std::abs(val) < 0.001) // micrometers
+        return QString("%1 %2m").arg(cutzeroes(val*1000000.0,_digits(val*10000000.0))).arg(QChar(0x3bc));
+    else if (std::abs(val) < 0.01) // less than 1cm -> millimeters
+        return QString("%1 mm").arg(cutzeroes(val*1000.0, _digits(val*1000.0)));
+    else if (std::abs(val) < 1) // less than 1m -> centimeters
+        return QString("%1 cm").arg(cutzeroes(val*100.0, _digits(val*100.0)));
+    else if (std::abs(val) >= 1000) // km
+        return QString("%1 km").arg(cutzeroes(val/1000.0, _digits(val/10000.0)));
+    return QString("%1 m").arg(val, 0, 'f', 2);
+}
+
 QVariant distanceModel::data(const QModelIndex &index, int role /* = Qt::DisplayRole */) const {
-    if (index.row() >= 0 && index.row() < rowCount() && role == DOFDisplayRole && datalist[index.row()].big)
-        return formatString.arg(cutzeroes(datalist[index.row()].value, digits(datalist[index.row()].value)));
+    if (index.row() >= 0 && index.row() < rowCount())
+        if ((role == DOFDisplayRole && datalist[index.row()].big) || role == DOFPrintRole)
+            return prettyPrint(datalist[index.row()].value);
     return focalModel::data(index, role);
 }
 

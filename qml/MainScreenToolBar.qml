@@ -9,7 +9,8 @@ ToolBar{
     Rectangle{ anchors.fill: parent; color: "#404040"}
     RowLayout {
         anchors.fill: parent
-        WhiteText { text: " DOFCalc"; font.pixelSize: tbar.height*0.5; color: "#a0a0a0";  horizontalAlignment: Text.AlignLeft;  Layout.fillWidth: true}
+        WhiteText { text: " DOFCalc"; font.pixelSize: tbar.height*0.5; color: "#a0a0a0";  horizontalAlignment: Text.AlignLeft; }
+        WhiteText { objectName: "deltaDisplay"; text: " "; font.pixelSize: tbar.height*0.5; horizontalAlignment: Text.AlignLeft;  Layout.fillWidth: true}
         ToolButton {text: qsTr(":"); onClicked: appmenu.open(); font.pixelSize: tbar.height*0.5;
             Menu { id: appmenu
                 MenuItem { text: "About"; onTriggered: aboutDialog.open();}

@@ -19,5 +19,4 @@
 #define t_IndexNameLen 7
 #define f_focal "%1mm"
 #define f_aperture "f/%1"
-#define f_distance "%1m"
 #define S_longdash QString("%1%1").arg(QChar(0x2014))

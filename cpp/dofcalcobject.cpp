@@ -149,19 +149,26 @@ void DOFCalculator::calc() {
     CoCM = qMax(CoCM, airy);
     qreal focalM2 = focalM * focalM;
     qreal H = focalM2 / aperture / CoCM + focalM;
-    setText("hyperfocalString", QString(f_distance).arg(H, 0, 'f', int(qMax(0.0, std::round(2.0 - std::log10(H))))));
+    setText("hyperfocalString", distanceModel::prettyPrint(H));
     if (focalM > distance * 0.9)
+    {
         setDOF(S_longdash, S_longdash);
+        setText("deltaDisplay", " ");
+    }
     else
     {
         qreal DOFNear = distance * focalM2 / (focalM2 - aperture * focalM * CoCM + aperture * distance * CoCM);
         qreal DOFFar = distance * focalM2 / (focalM2 + aperture * focalM * CoCM - aperture * distance * CoCM);
 
-        if (DOFFar > 0) {
-            int chars = qMax(0, int(1 - int(std::log10((DOFFar - DOFNear) / 10))));
-            setDOF(QString(f_distance).arg(DOFNear, 0, 'f', chars), QString(f_distance).arg(DOFFar, 0, 'f', chars));
+        if (DOFFar > 0)
+        {
+            setDOF(distanceModel::prettyPrint(DOFNear), distanceModel::prettyPrint(DOFFar));
+            setText("deltaDisplay", QString(" %1= %2").arg(QChar(0x394)).arg(distanceModel::prettyPrint(DOFFar - DOFNear)));
         }
         else
-            setDOF(QString(f_distance).arg(DOFNear, 0, 'f', qMax(0, 2 - int(std::log10(DOFNear)))), QString(QChar(0x221e)));
+        {
+            setDOF(distanceModel::prettyPrint(DOFNear), QString(QChar(0x221e)));
+            setText("deltaDisplay", " ");
+        }
     }
 }
