@@ -162,7 +162,9 @@ void DOFCalculator::calc() {
 
         if (DOFFar > 0)
         {
-            setDOF(distanceModel::prettyPrint(DOFNear), distanceModel::prettyPrint(DOFFar));
+            qreal delta = (DOFFar - DOFNear) / DOFNear; 
+            int digits = delta < 0.1 ? qBound(0, int(-1 * std::log10(delta))+1, 5) : -1;
+            setDOF(distanceModel::prettyPrint(DOFNear,digits), distanceModel::prettyPrint(DOFFar,digits));
             setText("deltaDisplay", QString(" %1= %2").arg(QChar(0x394)).arg(distanceModel::prettyPrint(DOFFar - DOFNear)));
         }
         else

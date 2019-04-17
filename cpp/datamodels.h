@@ -53,7 +53,7 @@ public:
     distanceModel(QObject *parent = nullptr) : focalModel(parent) {}
     virtual void populate0(const QHash<QString, int>&);
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
-    static QString prettyPrint(qreal val);
+    static QString prettyPrint(qreal val, int digits = -1);
 protected:
     static int _digits(qreal val) { return int(qMax(0.0, std::round(2.0 - std::log10(val)))); }
 };

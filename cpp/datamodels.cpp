@@ -56,17 +56,17 @@ static QString cutzeroes(qreal v, int digits) {
     return s;
 }
 
-QString distanceModel::prettyPrint(qreal val)
+QString distanceModel::prettyPrint(qreal val, int digits /* =-1 */)
 {
     if (std::abs(val) < 0.001) // micrometers
-        return QString("%1 %2m").arg(cutzeroes(val*1000000.0,_digits(val*10000000.0))).arg(QChar(0x3bc));
+        return QString("%1 %2m").arg(cutzeroes(val*1000000.0, digits < 0 ? _digits(val*10000000.0) : digits)).arg(QChar(0x3bc));
     else if (std::abs(val) < 0.01) // less than 1cm -> millimeters
-        return QString("%1 mm").arg(cutzeroes(val*1000.0, _digits(val*1000.0)));
+        return QString("%1 mm").arg(cutzeroes(val*1000.0, digits < 0 ? _digits(val*1000.0) : digits));
     else if (std::abs(val) < 1) // less than 1m -> centimeters
-        return QString("%1 cm").arg(cutzeroes(val*100.0, _digits(val*100.0)));
+        return QString("%1 cm").arg(cutzeroes(val*100.0, digits < 0 ? _digits(val*100.0) : digits));
     else if (std::abs(val) >= 1000) // km
-        return QString("%1 km").arg(cutzeroes(val/1000.0, _digits(val/10000.0)));
-    return QString("%1 m").arg(val, 0, 'f', 2);
+        return QString("%1 km").arg(cutzeroes(val / 1000.0, digits < 0 ? _digits(val / 10000.0) : digits));
+    return QString("%1 m").arg(cutzeroes(val, digits < 0 ? _digits(val) : digits));
 }
 
 QVariant distanceModel::data(const QModelIndex &index, int role /* = Qt::DisplayRole */) const {
