@@ -1,4 +1,4 @@
-# DOFCalc v0.1
+# DOFCalc v0.2
 ## README
 
 This is my first application for mobile phones, and my first on Qt+QML.
