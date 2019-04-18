@@ -9,7 +9,7 @@ Dialog{
     standardButtons: Dialog.Ok
     anchors.centerIn: parent
     width: root.width*0.7
-    title: "DOFCalc v0.1"
+    title: "DOFCalc v0.2"
     contentItem: WhiteText {
         text: "\u00a9 2019 Alex Tutubalin, LibRaw LLC<br/>lexa@libraw.org"
         font.pixelSize: root.font.pixelSize*0.8
