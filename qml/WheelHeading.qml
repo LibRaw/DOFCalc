@@ -8,6 +8,6 @@ WhiteText {
     horizontalAlignment:    Text.AlignHCenter
     height:                 root.font.pixelSize*2
     padding:                root.font.pixelSize/4
-    width:                  parent.width/4
+    width:                  root.width*0.74/3
     Rectangle  { height: 2;  width: parent.width; y: parent.height-2;color: "#f0f0f0" }
 }

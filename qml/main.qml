@@ -34,9 +34,9 @@ ApplicationWindow { id: root;
     Grid { id:          mainGrid
         anchors.top:    topHeader.bottom
         height:         root.height*14/15 - topHeader.height
-        width:          root.width*8/10
+        width:          root.width*9/10 
         leftPadding:    (root.width - width) / 2
-        columnSpacing:  width/8
+        columnSpacing:  root.width * 0.08
 		rowSpacing:     height/20
         columns:        3
         WheelHeading {  id: focalString;     objectName: "focalString";}
